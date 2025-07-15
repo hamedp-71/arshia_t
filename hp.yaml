@@ -49,6 +49,11 @@ proxy-groups:
     interval: 300
     proxies:
       - FastNode
+  - name: Proxy
+    type: select
+    proxies:
+      - Auto
+      - FastNode
   - name: Direct
     type: select
     proxies:
