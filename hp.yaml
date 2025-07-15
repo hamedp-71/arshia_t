@@ -75,12 +75,24 @@ proxies:
     skip-cert-verify: false
     udp: true
 
+  - name: "FastNode-V2Ray"
+    type: vmess
+    server: 98.98.140.86
+    port: 8194
+    uuid: fastnode_648041
+    alterId: 0
+    cipher: auto
+    password: QShzZdGAGNXkY3DWeP79tEg8VPk9qxvt
+    udp: true
+    tls: false
+
 proxy-groups:
   - name: "🌐 گلوبال"
     type: select
     proxies:
       - "🚀 انتخاب خودکار (بهترین)"
       - "FastNode"
+      - "FastNode-V2Ray"
 
   - name: "🚀 انتخاب خودکار (بهترین)"
     type: url-test
@@ -89,6 +101,7 @@ proxy-groups:
     tolerance: 50
     proxies:
       - "FastNode"
+      - "FastNode-V2Ray"
 
 rule-providers:
   ir:
