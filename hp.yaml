@@ -1,12 +1,4 @@
-برا یک کانفیگ میدم اون رو میخوام داخل یک کدی که برات میفرستم بزنی تا بتونم بدون مشکل وارد کلش متا بکنم و بهش متصل بشم ، این کانفیگ هست :  proxies:
-  - name: "FastNode"
-    type: trojan
-    server: 98.98.140.86
-    port: 443
-    password: fastnode_648041_38624048170664717
-    sni: tn.trojancert.com
-    skip-cert-verify: false
-    udp: true   اگر کانفیگ مشکلات داشت میتونی اصلاحش کنی تا وقتی وارد کلش متا میکنم خطا نده ، اینم کدی که میخوام داخلش بزنی :    mixed-port: 7890
+mixed-port: 7890
 ipv6: true
 allow-lan: true
 mode: rule
@@ -74,6 +66,14 @@ sniffer:
       ports: [443, 8443, 2053, 2083, 2087, 2096]
 
 proxies:
+  - name: "FastNode"
+    type: trojan
+    server: 98.98.140.86
+    port: 443
+    password: fastnode_648041_38624048170664717
+    sni: tn.trojancert.com
+    skip-cert-verify: false
+    udp: true
 
 proxy-groups:
   - name: "🌐 گلوبال"
