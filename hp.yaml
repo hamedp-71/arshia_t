@@ -1,0 +1,150 @@
+برا یک کانفیگ میدم اون رو میخوام داخل یک کدی که برات میفرستم بزنی تا بتونم بدون مشکل وارد کلش متا بکنم و بهش متصل بشم ، این کانفیگ هست :  proxies:
+  - name: "FastNode"
+    type: trojan
+    server: 98.98.140.86
+    port: 443
+    password: fastnode_648041_38624048170664717
+    sni: tn.trojancert.com
+    skip-cert-verify: false
+    udp: true   اگر کانفیگ مشکلات داشت میتونی اصلاحش کنی تا وقتی وارد کلش متا میکنم خطا نده ، اینم کدی که میخوام داخلش بزنی :    mixed-port: 7890
+ipv6: true
+allow-lan: true
+mode: rule
+log-level: warning
+disable-keep-alive: false
+keep-alive-idle: 30
+keep-alive-interval: 30
+unified-delay: false
+geo-auto-update: true
+geo-update-interval: 168
+external-controller: '127.0.0.1:9090'
+external-ui-url: 'https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip'
+external-ui: ui
+external-controller-cors:
+  allow-origins: ['*']
+  allow-private-network: true
+profile:
+  store-selected: true
+  store-fake-ip: true
+hosts: {}
+dns:
+  enable: true
+  listen: 0.0.0.0:1053
+  ipv6: true
+  respect-rules: true
+  use-hosts: true
+  use-system-hosts: false
+  nameserver:
+    - '9.9.9.9'
+    - '2620:fe::fe'
+    - '1.1.1.1'
+    - '2606:4700:4700::1111'
+    - '8.8.8.8'
+    - '2001:4860:4860::8888'
+    - '8.8.4.4'
+    - '2001:4860:4860::8844'
+  proxy-server-nameserver:
+    - '9.9.9.9'
+    - '2620:fe::fe'
+    - '1.1.1.1'
+    - '2606:4700:4700::1111'
+    - '8.8.8.8'
+    - '2001:4860:4860::8888'
+    - '8.8.4.4'
+    - '2001:4860:4860::8844'
+tun:
+  enable: true
+  stack: mixed
+  auto-route: true
+  strict-route: true
+  auto-detect-interface: true
+  dns-hijack:
+  - 'tcp://any:53'
+  - 'udp://any:53'
+  mtu: 1280
+sniffer:
+  enable: true
+  force-dns-mapping: true
+  parse-pure-ip: true
+  override-destination: false
+  sniff:
+    HTTP:
+      ports: [80, 8080, 8880, 2052, 2082, 2086, 2095]
+    TLS:
+      ports: [443, 8443, 2053, 2083, 2087, 2096]
+
+proxies:
+
+proxy-groups:
+  - name: "🌐 گلوبال"
+    type: select
+    proxies:
+      - "🚀 انتخاب خودکار (بهترین)"
+      - "FastNode"
+
+  - name: "🚀 انتخاب خودکار (بهترین)"
+    type: url-test
+    url: "https://www.gstatic.com/generate_204"
+    interval: 600
+    tolerance: 50
+    proxies:
+      - "FastNode"
+
+rule-providers:
+  ir:
+    type: http
+    format: text
+    behavior: domain
+    url: "https://raw.githubusercontent.com/Chocolate4U/Iran-clash-rules/release/ir.txt"
+    path: "./ruleset/ir.txt"
+    interval: 86400
+  ir-cidr:
+    type: http
+    format: text
+    behavior: domain
+    url: "https://raw.githubusercontent.com/Chocolate4U/Iran-clash-rules/release/ircidr.txt"
+    path: "./ruleset/ir-cidr.txt"
+    interval: 86400
+  malware:
+    type: http
+    format: text
+    behavior: domain
+    url: "https://raw.githubusercontent.com/Chocolate4U/Iran-clash-rules/release/malware.txt"
+    path: "./ruleset/malware.txt"
+    interval: 86400
+  phishing:
+    type: http
+    format: text
+    behavior: domain
+    url: "https://raw.githubusercontent.com/Chocolate4U/Iran-clash-rules/release/phishing.txt"
+    path: "./ruleset/phishing.txt"
+    interval: 86400
+  cryptominers:
+    type: http
+    format: text
+    behavior: domain
+    url: "https://raw.githubusercontent.com/Chocolate4U/Iran-clash-rules/release/cryptominers.txt"
+    path: "./ruleset/cryptominers.txt"
+    interval: 86400
+  ads:
+    type: http
+    format: text
+    behavior: domain
+    url: "https://raw.githubusercontent.com/Chocolate4U/Iran-clash-rules/release/ads.txt"
+    path: "./ruleset/ads.txt"
+    interval: 86400
+
+rules:
+  - RULE-SET,ir,DIRECT
+  - RULE-SET,ir-cidr,DIRECT
+  - RULE-SET,malware,REJECT
+  - RULE-SET,phishing,REJECT
+  - RULE-SET,cryptominers,REJECT
+  - RULE-SET,ads,REJECT
+  - MATCH,🌐 گلوبال
+
+ntp:
+  enable: true
+  server: "time.apple.com"
+  port: 123
+  interval: 30
